@@ -12,20 +12,20 @@ class CNN_baseline(tf.keras.Model):
         self.batch_size = 100
         self.conv_kernel_size = 8
         self.pool_kernel_size = 4
-        self.optimizer = tf.keras.optimizers.Adam(learning_rate=0.003)
+        self.optimizer = tf.keras.optimizers.Adam(learning_rate=0.1)
         
-        nkernels = [320,480,560]
+        nkernels = [320,480,280]
         sequence_length =  1000
         n_genomic_features  = 919
         
         
         # remove data_format='channels_first',
         self.cnn_layer1 = tf.keras.layers.Conv1D(filters=nkernels[0], kernel_size = self.conv_kernel_size,  padding='valid',activation='relu')
-        #self.maxpool1 = tf.keras.layers.MaxPool1D(pool_size=self.pool_kernel_size, strides=self.pool_kernel_size, padding='valid')
+        self.maxpool1 = tf.keras.layers.MaxPool1D(pool_size=self.pool_kernel_size, strides=self.pool_kernel_size, padding='valid')
         #self.dropout1 = tf.nn.dropout(0.2)
         
         self.cnn_layer2 = tf.keras.layers.Conv1D(filters=nkernels[1], kernel_size = self.conv_kernel_size, padding='valid',activation='relu')
-        #self.maxpool2 = tf.keras.layers.MaxPool1D(pool_size=self.pool_kernel_size, strides=self.pool_kernel_size, padding='valid')
+        self.maxpool2 = tf.keras.layers.MaxPool1D(pool_size=self.pool_kernel_size, strides=self.pool_kernel_size, padding='valid')
         #self.maxpool2 = tf.nn.max_pool(ksize=pool_kernel_size, strides=pool_kernel_size)
         #self.dropout2 = tf.nn.dropout(0.2)
         
@@ -55,18 +55,19 @@ class CNN_baseline(tf.keras.Model):
         inputs = tf.transpose(inputs, perm=[0, 2, 1]) 
         print("inputs.shape: ",inputs.shape)
         out = self.cnn_layer1(inputs)
-        
+        #print(out)
         print("out.shape cnn1: ",out.shape)
-        out = tf.nn.max_pool(out,ksize=self.pool_kernel_size, strides=self.pool_kernel_size, padding ='VALID')
-        #out = self.maxpool1(out)
+        #out = tf.nn.max_pool(out,ksize=self.pool_kernel_size, strides=self.pool_kernel_size, padding ='VALID')
+        out = self.maxpool1(out)
         print('max output size: ', out.shape)
-        out = tf.nn.dropout(out,0.2)
+        #out = tf.nn.dropout(out,0.2)
         print("out.shape1: ",out.shape)
+        #print(out)
         
         out = self.cnn_layer2(out)
         print("out.shape cnn2: ",out.shape)
-        #out = self.maxpool1(out)
-        out = tf.nn.max_pool(out,ksize=self.pool_kernel_size, strides=self.pool_kernel_size, padding ='VALID')
+        out = self.maxpool2(out)
+        #out = tf.nn.max_pool(out,ksize=self.pool_kernel_size, strides=self.pool_kernel_size, padding ='VALID')
         out = tf.nn.dropout(out,0.2)
         print("out.shape2: ",out.shape)
         
@@ -74,7 +75,8 @@ class CNN_baseline(tf.keras.Model):
         out = tf.nn.dropout(out,0.5)
         
         print("out.shape3: ",out.shape)
-        reshape_out = tf.reshape(out,[-1, 560 * self.n_channels])
+        #out.reshape([-1, 560 * self.n_channels])
+        reshape_out = tf.reshape(out,[-1, 280 * self.n_channels])
         print("reshape size: ", reshape_out.shape)
         out = self.dense1(reshape_out)
         predict = self.dense2(out)

@@ -22,30 +22,12 @@ class CNN_baseline(tf.keras.Model):
         # remove data_format='channels_first',
         self.cnn_layer1 = tf.keras.layers.Conv1D(filters=self.nkernels[0],kernel_size = self.conv_kernel_size,  padding='valid',activation='relu')
         self.maxpool1 = tf.keras.layers.MaxPool1D(pool_size=self.pool_kernel_size,strides=self.pool_kernel_size, padding='valid')
-        #self.dropout1 = tf.nn.dropout(0.2)
-        
+
         self.cnn_layer2 = tf.keras.layers.Conv1D(filters=self.nkernels[1], kernel_size = self.conv_kernel_size, padding='valid',activation='relu')
         self.maxpool2 = tf.keras.layers.MaxPool1D(pool_size=self.pool_kernel_size, strides=self.pool_kernel_size, padding='valid')
-        #self.maxpool2 = tf.nn.max_pool(ksize=pool_kernel_size, strides=pool_kernel_size)
-        #self.dropout2 = tf.nn.dropout(0.2)
         
         self.cnn_layer3 = tf.keras.layers.Conv1D(filters=self.nkernels[2], kernel_size = self.conv_kernel_size, padding='valid',activation='relu')
-        #self.maxpool3 = tf.keras.layers.MaxPool1D(pool_size=self.pool_kernel_size, strides=self.pool_kernel_size, padding='valid')
-        #self.maxpool3 = tf.nn.max_pool(ksize=pool_kernel_size, strides=pool_kernel_size)
-        #self.dropout3 = tf.nn.dropout(0.5)
-        
-        reduce_by = self.conv_kernel_size - 1
-        pool_kernel_size = float(self.pool_kernel_size)
-        self.n_channels = int(
-            np.floor(
-                (np.floor(
-                    (sequence_length - reduce_by) / pool_kernel_size)
-                 - reduce_by) / pool_kernel_size)
-            - reduce_by)
-        print("reduce_by: ",reduce_by)
-        print("self.n_channels: ",self.n_channels)
-        
-        #self.dense1 = tf.keras.layers.Dense(nkernels[2] * self.n_channels, activation='relu')
+
         self.dense1 = tf.keras.layers.Dense(n_genomic_features, activation='relu')
         self.dense2 = tf.keras.layers.Dense(n_genomic_features, activation='sigmoid')      
         

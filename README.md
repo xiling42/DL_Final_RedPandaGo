@@ -14,4 +14,4 @@ This folder is for check-off 3 which we add our transformer after three convolut
 This is a improved version of muti-head and convolution model implementation. Our PPT for final presentation should be in this folder. It has both muti-head and single-head implemented for transformer.
 
 ## Project-final:
-This forder contains the final version of our code for now. The final project report should be in this folder. There is a result folder inside which has all our testing output log file with different parameters.
+This forder contains the final version of our code for now. Please refer to the README in this forder for more details. The final project report should be in this folder. There is a result folder inside which has all our testing output log file with different parameters.

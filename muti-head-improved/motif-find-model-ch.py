@@ -31,7 +31,7 @@ class CNN_Attention(tf.keras.Model):
         #Dense layer (output 919)  
         # remove data_format='channels_first',
 
-        #self.pos_encoder = transformer.Position_Encoding_Layer(self.dna_length,self.embedding_size)
+        self.pos_encoder = transformer.Position_Encoding_Layer(self.dna_length,self.embedding_size)
         
         self.cnn_layer1 = tf.keras.layers.Conv1D(filters=self.nkernels[0],kernel_size = self.conv_kernel_size,  padding='valid',activation='relu')
         self.maxpool1 = tf.keras.layers.MaxPool1D(pool_size=self.pool_kernel_size,strides=self.pool_kernel_size, padding='valid')
@@ -62,10 +62,11 @@ class CNN_Attention(tf.keras.Model):
         print("inputs.shape: ",inputs.shape)
 
         #k-mer
-        #input_kmer = self.k_mers_block(self.k,inputs)
-        #encoder_input_embeddings = tf.nn.embedding_lookup(self.E,inputs)
-        #pos_encoder_output = self.pos_encoder(encoder_input_embeddings)
-        #encoder_output = self.encoder(pos_encoder_output)
+        input_kmer = self.k_mers_block(self.k,inputs)
+        encoder_input_embeddings = tf.nn.embedding_lookup(self.E,inputs)
+        pos_encoder_output = self.pos_encoder(encoder_input_embeddings)
+        print('positional pos size: ', pos_encoder_output)
+        encoder_output = self.encoder(pos_encoder_output)
 
         #print("input kmer shape: ",input_kmer.shape)
         out = self.cnn_layer1(inputs)

@@ -1,7 +1,7 @@
 # DL_Final_RedPandaGo
 
 ## BaseLine-Preprocessed-Checkoff folder: 
-Contains our earliest upload for data proprocessing and basic pytorch implementation. This is for checkoff2. The problems we found and processed for that time is listed in check_off2_problems.docx.
+Contains our earliest upload for data proprocessing and basic pytorch implementation. This is for checkoff2. The problems we found and process for that time are listed in check_off2_problems.docx.
 
 ## Baseline-tensorflow folder: 
 We changed our model to use tensorflow. It contains a baseline_model3.py using three convolutional layer to train our model.

@@ -1,0 +1,12 @@
+-----------epoch 1--------------
+mean train loss: tf.Tensor(0.088332996, shape=(), dtype=float32)
+-----------epoch 2--------------
+mean train loss: tf.Tensor(0.062136263, shape=(), dtype=float32)
+-----------epoch 3--------------
+mean train loss: tf.Tensor(0.061184768, shape=(), dtype=float32)
+-----------epoch 4--------------
+mean train loss: tf.Tensor(0.060385022, shape=(), dtype=float32)
+-----------epoch 5--------------
+mean train loss: tf.Tensor(0.059847318, shape=(), dtype=float32)
+sks (70000, 997)
+Test AUROC score: 0.7860645754398716

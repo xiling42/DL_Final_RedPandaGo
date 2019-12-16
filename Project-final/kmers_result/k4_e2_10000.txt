@@ -1,0 +1,6 @@
+-----------epoch 1--------------
+mean train loss: tf.Tensor(0.08776767, shape=(), dtype=float32)
+-----------epoch 2--------------
+mean train loss: tf.Tensor(0.062098417, shape=(), dtype=float32)
+sks (70000, 997)
+Test AUROC score: tf.Tensor(0.7481059609159336, shape=(), dtype=float64)

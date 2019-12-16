@@ -14,3 +14,9 @@ Code using k-mers and transformer before convolutional layers model
 
 ## motif-find-model.py:
 Code using three convolutional layer and transformers.
+
+## preprocess.py
+preprocess raw DNA sequence into kmers, convert kmers into ids
+
+## transformer_func.py
+transformer models and functions
